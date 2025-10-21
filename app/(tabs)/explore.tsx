@@ -1,112 +1,87 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import Navbar from "@/components/Navbar";
 
-import { Collapsible } from '@/components/ui/collapsible';
-import { ExternalLink } from '@/components/external-link';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Fonts } from '@/constants/theme';
-
-export default function TabTwoScreen() {
+export default function ExploreScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type="title"
-          style={{
-            fontFamily: Fonts.rounded,
-          }}>
-          Explore
-        </ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image
-          source={require('@/assets/images/react-logo.png')}
-          style={{ width: 100, height: 100, alignSelf: 'center' }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful{' '}
-          <ThemedText type="defaultSemiBold" style={{ fontFamily: Fonts.mono }}>
-            react-native-reanimated
-          </ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <View className="flex-1 bg-gray-50">
+      <Navbar
+        title="Explore Destinations"
+        subtitle="Discover amazing places to visit"
+        showSearch={true}
+        showNotifications={true} onBackPress={undefined}      />
+
+      <ScrollView className="flex-1 px-4 pt-6">
+        {/* Popular Destinations */}
+        <View className="mb-6">
+          <Text className="text-xl font-bold text-gray-900 mb-4">Popular Destinations</Text>
+          
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mb-4">
+            <TouchableOpacity className="bg-white rounded-2xl p-4 mr-4 w-64 shadow-sm">
+              <View className="bg-blue-100 rounded-xl h-32 mb-3 items-center justify-center">
+                <Ionicons name="airplane" size={40} color="#3b82f6" />
+              </View>
+              <Text className="text-gray-900 font-bold text-lg">Dubai</Text>
+              <Text className="text-gray-600 text-sm">Starting from ₹25,000</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity className="bg-white rounded-2xl p-4 mr-4 w-64 shadow-sm">
+              <View className="bg-green-100 rounded-xl h-32 mb-3 items-center justify-center">
+                <Ionicons name="leaf" size={40} color="#10b981" />
+              </View>
+              <Text className="text-gray-900 font-bold text-lg">Thailand</Text>
+              <Text className="text-gray-600 text-sm">Starting from ₹35,000</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity className="bg-white rounded-2xl p-4 mr-4 w-64 shadow-sm">
+              <View className="bg-orange-100 rounded-xl h-32 mb-3 items-center justify-center">
+                <Ionicons name="sunny" size={40} color="#f59e0b" />
+              </View>
+              <Text className="text-gray-900 font-bold text-lg">Maldives</Text>
+              <Text className="text-gray-600 text-sm">Starting from ₹85,000</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </View>
+
+        {/* Categories */}
+        <View className="mb-6">
+          <Text className="text-xl font-bold text-gray-900 mb-4">Travel Categories</Text>
+          
+          <View className="flex-row flex-wrap justify-between">
+            <TouchableOpacity className="bg-white rounded-xl p-4 w-[48%] mb-4 shadow-sm">
+              <View className="bg-purple-100 rounded-full p-3 w-12 h-12 items-center justify-center mb-3">
+                <Ionicons name="business" size={24} color="#7c3aed" />
+              </View>
+              <Text className="text-gray-900 font-semibold">Business</Text>
+              <Text className="text-gray-600 text-sm">Corporate travel</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity className="bg-white rounded-xl p-4 w-[48%] mb-4 shadow-sm">
+              <View className="bg-pink-100 rounded-full p-3 w-12 h-12 items-center justify-center mb-3">
+                <Ionicons name="heart" size={24} color="#ec4899" />
+              </View>
+              <Text className="text-gray-900 font-semibold">Honeymoon</Text>
+              <Text className="text-gray-600 text-sm">Romantic getaways</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity className="bg-white rounded-xl p-4 w-[48%] mb-4 shadow-sm">
+              <View className="bg-blue-100 rounded-full p-3 w-12 h-12 items-center justify-center mb-3">
+                <Ionicons name="people" size={24} color="#3b82f6" />
+              </View>
+              <Text className="text-gray-900 font-semibold">Family</Text>
+              <Text className="text-gray-600 text-sm">Family vacations</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity className="bg-white rounded-xl p-4 w-[48%] mb-4 shadow-sm">
+              <View className="bg-green-100 rounded-full p-3 w-12 h-12 items-center justify-center mb-3">
+                <Ionicons name="trail-sign" size={24} color="#10b981" />
+              </View>
+              <Text className="text-gray-900 font-semibold">Adventure</Text>
+              <Text className="text-gray-600 text-sm">Thrilling experiences</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>   
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-});
