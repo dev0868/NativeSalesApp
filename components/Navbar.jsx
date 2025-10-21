@@ -1,12 +1,16 @@
-import { View, Text, TouchableOpacity, TextInput, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { LinearGradient } from 'expo-linear-gradient';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Updates from "expo-updates";
+import { LinearGradient } from "expo-linear-gradient";
+import {
+  Pressable,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+// import * as Updates from "expo-updates";
 import { router } from "expo-router";
-
-
 
 export default function Navbar({
   title,
@@ -20,15 +24,18 @@ export default function Navbar({
 
   return (
     <LinearGradient
-    colors={['#7c3aed', '#5b21b6']} 
-    start={{ x: 0, y: 0 }}
-    end={{ x: 1, y: 1 }}
-    className="rounded-b-3xl px-4 pb-6"
-    style={{ paddingTop: insets.top + 16 }}
-  >
+      colors={["#7c3aed", "#5b21b6"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      className="rounded-b-3xl px-4 pb-6"
+      style={{ paddingTop: insets.top + 16 }}
+    >
       <View className="flex-row items-center justify-between mb-4">
         {showSearch && !showBack && (
-          <Pressable onPress={async() =>  await   AsyncStorage.removeItem("createAccount") } className="flex-row items-center bg-white/20 rounded-full px-4 py-3 flex-1 mr-4">
+          <Pressable
+            onPress={async () => await AsyncStorage.removeItem("createAccount")}
+            className="flex-row items-center bg-white/20 rounded-full px-4 py-3 flex-1 mr-4"
+          >
             <Ionicons name="search" size={20} color="white" />
             <TextInput
               placeholder="Search destinations"
@@ -39,7 +46,7 @@ export default function Navbar({
         )}
 
         {showBack && (
-          <TouchableOpacity 
+          <TouchableOpacity
             onPress={onBackPress}
             className="bg-white/20 rounded-full p-3 mr-4"
           >
@@ -50,15 +57,16 @@ export default function Navbar({
         {!showSearch && !showBack && <View className="flex-1" />}
 
         {showNotifications && (
-          <TouchableOpacity 
+          <TouchableOpacity
             onPress={async () => {
               try {
                 await AsyncStorage.removeItem("createAccount");
-                
+
                 if (__DEV__) {
                   router.replace("/(auth)");
                 } else {
-                  await Updates.reloadAsync();
+                  console.log("reload");
+                  // await Updates.reloadAsync();
                 }
               } catch (error) {
                 console.error("Error during logout:", error);
