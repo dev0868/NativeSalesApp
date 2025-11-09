@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback, useMemo } from "react";
 import { View, Text, TouchableOpacity, ActivityIndicator, Animated, FlatList } from "react-native";
-// import Navbar from "@/components/Navbar";
-// import QuotationCards from "@/components/ui/cards/QuotationCards";
+import Navbar from "@/components/Navbar";
+import QuotationCards from "@/components/ui/cards/QuotationCards";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -78,20 +78,18 @@ export default function HomeScreen() {
 
   const renderItem = useCallback(({ item }) => {
     if (!item) return null;
-    return null
-    
-    // <QuotationCards leadData={item} />;
+    return <QuotationCards leadData={item} />;
   }, []);
 
   return (
     <View className="flex-1 bg-gray-50">
-      {/* <Navbar
+      <Navbar
         title="Journey Readdy"
         subtitle="Explore beautiful destinations"
         showSearch
         showNotifications
         onNotificationPress={() => console.log("Notifications pressed")}
-      /> */}
+      />
 
       {loading ? (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
